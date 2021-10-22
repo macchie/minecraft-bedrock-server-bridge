@@ -3,9 +3,9 @@
 
 # Minecraft Bedrock Server Bridge
 
-`RCON` replacement for Mincraft Bedrock Dedicated Servers.
+`RCON` replacement for Minecraft Bedrock Dedicated Servers.
 
-Currently allows you to bridge you `server console` to a `Telegram Bot`.
+Currently allows you to bridge your `server console` to a `Telegram Bot`.
 
 ### Setup
 
