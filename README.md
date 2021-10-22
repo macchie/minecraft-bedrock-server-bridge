@@ -76,7 +76,7 @@ bds_bridge:
 
 ### How To Use
 
-Open `Telegram` and send a message to your bot, every message is passed to the Server console (no filters are applied so far, be carefult).
+Open `Telegram` and send a message to your bot, every message is passed to the Server console (no filters are applied so far, be careful).
 
 For example, to `say` something to all players you can text:
 
@@ -88,7 +88,9 @@ or execute any other command:
 - `daylock`
 ### To-Do
 
+- Catch Server responses and redirect through request channel (Telegram BOT, Api, etc..)
 - Implement HTTP API protocol to send commands
+- Add Web Panel ?
 
 ### Notes
 
