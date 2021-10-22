@@ -7,7 +7,7 @@
 
 Currently allows you to bridge you `server console` to a `Telegram Bot`.
 
-### How to Use
+### Setup
 
 [Create a Telegram Bot and obtain the Token.](https://core.telegram.org/bots#3-how-do-i-create-a-bot)
 
@@ -74,6 +74,18 @@ bds_bridge:
     - /var/run/docker.sock:/var/run/docker.sock
 ```
 
+### How To Use
+
+Open `Telegram` and send a message to your bot, every message is passed to the Server console (no filters are applied so far, be carefult).
+
+For example, to `say` something to all players you can text:
+
+- `say Hello World!`
+
+or execute any other command:
+
+- `give @s diamond_block`
+- `daylock`
 ### To-Do
 
 - Implement HTTP API protocol to send commands
