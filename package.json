@@ -1,0 +1,22 @@
+{
+  "name": "minecraft-bedrock-server-bridge",
+  "version": "1.0.0",
+  "description": "Minecraft Bedrock Server Bridge",
+  "main": "dist/main.js",
+  "scripts": {
+    "prestart": "npx tsc",
+    "start:dev": "tsc-watch --onSuccess \"node dist/main.js\"",
+    "start": "node dist/main.js"
+  },
+  "author": "Andrea Macchieraldo",
+  "license": "ISC",
+  "dependencies": {
+    "dockerode": "^3.3.1",
+    "telegraf": "^4.4.2"
+  },
+  "devDependencies": {
+    "@types/dockerode": "^3.3.0",
+    "tsc-watch": "^4.5.0",
+    "typescript": "^4.4.4"
+  }
+}
