@@ -84,7 +84,7 @@ For example, to `say` something to all players you can text:
 
 or execute any other command:
 
-- `give @s diamond_block`
+- `give @username diamond_block`
 - `daylock`
 ### To-Do
 
