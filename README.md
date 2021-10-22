@@ -4,8 +4,11 @@
 # Minecraft Bedrock Server Bridge
 
 `RCON` replacement for Mincraft Bedrock Dedicated Servers. 
+Currently allows you to bridge you server console to a Telegram Bot.
 
 ### How to Use
+
+[Create a Telegram Bot and obtain the Token.](https://core.telegram.org/bots#3-how-do-i-create-a-bot)
 
 Extend your `itzg/docker-minecraft-bedrock-server` `docker-compose.yml` file to produce something similar:
 
@@ -57,7 +60,7 @@ labels:
 `stdin_open` and `tty` allows you attach to the Docker container to run commands through the console.
 Adding a `labels` entry with a label `minecraft_bedrock_server` (label value is not important, this is just to flag which container is the Minecraft Server)
 
-Also add a new `bds_bridge` service:
+Also, add a new `bds_bridge` service and set `TELEGRAM_BOT_TOKEN` and `TELEGRAM_BOT_ADMINS`:
 
 ```yaml
 bds_bridge:
