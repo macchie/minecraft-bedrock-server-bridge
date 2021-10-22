@@ -71,4 +71,4 @@ bds_bridge:
 
 ### Notes
 
-- Currently working **ONLY** in combination with: [https://github.com/itzg/docker-minecraft-bedrock-server](itzg/docker-minecraft-bedrock-server) **in a Docker Environment**
+- Currently working **ONLY** in combination with: [itzg/docker-minecraft-bedrock-server](itzg/docker-minecraft-bedrock-serverhttps://github.com/itzg/docker-minecraft-bedrock-server) **in a Docker Environment**
