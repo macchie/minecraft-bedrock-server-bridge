@@ -1,0 +1,34 @@
+version: '3.4'
+
+services:
+  bds:
+    image: itzg/minecraft-bedrock-server
+    environment:
+      EULA: "TRUE"
+      GAMEMODE: creative
+      SERVER_NAME: Your Server Name
+    ports:
+      - 19132:19132/udp
+#      - 39132:39132
+#      - 39132:39132/udp
+#      - 39133:39133
+#      - 39133:39133/udp
+    volumes:
+      - /path/to/your/data:/data
+    labels:
+      minecraft_bedrock_server: "true"
+    stdin_open: true
+    tty: true
+    sysctls:
+      net.ipv4.ip_local_port_range: 39132 39133
+
+  bds_bridge:
+    image: macchie/minecraft-bedrock-server-bridge
+    environment:
+      - TELEGRAM_BOT_TOKEN=12345
+      - TELEGRAM_BOT_ADMINS=username1,username2
+      - ENABLE_API=false
+      - API_TOKEN=12345
+      - API_PORT=17394
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
