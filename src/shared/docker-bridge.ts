@@ -112,7 +112,7 @@ export class DockerBridge extends EventEmitter {
       }
 
       this.responseTimeout = setTimeout(() => {
-        if (this.currentCommand.command.trim() !== out.trim()) {
+        if (this.currentCommand && this.currentCommand.command.trim() !== out.trim()) {
           this.emit(`${this.currentCommand.channel}-response`, { ...this.currentCommand, response: out })
         } else {
           this.emit(`${this.currentCommand.channel}-response`, { ...this.currentCommand, response: `Command executed.` })
