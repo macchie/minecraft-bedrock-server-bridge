@@ -8,6 +8,9 @@ export class TelegramBot {
   private static bot: Telegraf;
   private static admins: string[] = [];
   private static bridge: DockerBridge;
+  private static adminChatIDs: {
+    [username: string]: number
+  } = {};
 
   public static async init(_bridge: DockerBridge) {
     // set bridge
@@ -51,11 +54,14 @@ export class TelegramBot {
       if (this.admins.includes(username) === false) {
         ctx.reply(`Sorry ${username}, you are not an admin!`)
         return;
+      } else {
+        this.adminChatIDs[username] = ctx.chat.id;
       }
 
+
       if (this.bridge.isAttached) {
-        if (ctx.chat?.id) {
-          this.bridge.sendMessage(new BridgeCommand('telegram', command, ctx.chat.id));
+        for (const username of Object.keys(this.adminChatIDs)) {
+          this.bridge.sendMessage(new BridgeCommand('telegram', command, this.adminChatIDs[username]));
         }
       }
     } catch (err) {

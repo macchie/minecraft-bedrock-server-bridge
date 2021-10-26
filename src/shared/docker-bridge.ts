@@ -9,7 +9,6 @@ export class BridgeCommand {
   channel!: 'api' | 'telegram';
   command!: string;
   chatId?: number;
-  executed: boolean = false;
   response?: string;
 
   constructor(channel, command, chatId?) {
@@ -24,7 +23,7 @@ export class DockerBridge extends EventEmitter {
   private client!: Dockerode;
   private serverContainer!: Dockerode.Container;
   private outStream!: NodeJS.ReadWriteStream;
-  private currentCommand!: BridgeCommand;
+  private currentCommand!: BridgeCommand | null;
   private responseTimeout?;
   private queue: BridgeCommand[] = [];
 
@@ -54,7 +53,7 @@ export class DockerBridge extends EventEmitter {
     await this.attachToContainer();
 
     setInterval(() => {
-      if (this.currentCommand && this.currentCommand.executed === false) {
+      if (this.currentCommand) {
         return;
       }
 
@@ -112,12 +111,15 @@ export class DockerBridge extends EventEmitter {
       }
 
       this.responseTimeout = setTimeout(() => {
-        if (this.currentCommand && this.currentCommand.command.trim() !== out.trim()) {
-          this.emit(`${this.currentCommand.channel}-response`, { ...this.currentCommand, response: out })
-        } else {
-          this.emit(`${this.currentCommand.channel}-response`, { ...this.currentCommand, response: `Command executed.` })
+        if (this.currentCommand) {
+          if (this.currentCommand.command.trim() !== out.trim()) {
+            this.emit(`${this.currentCommand.channel}-response`, { ...this.currentCommand, response: out })
+          } else {
+            this.emit(`${this.currentCommand.channel}-response`, { ...this.currentCommand, response: `Command executed.` })
+          }
+          
+          this.currentCommand = null;
         }
-        this.currentCommand.executed = true;
       }, 200)
       
       return done(null, out);
