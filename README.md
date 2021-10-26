@@ -53,7 +53,7 @@ labels:
   minecraft_bedrock_server: "true"
 ```
 
-Remeber to user `stdin_open` and `tty`, these two properties allows you attach to the Docker container to run commands through the console.
+Remeber to set `stdin_open` and `tty`, these two properties allows you attach to the Docker container to run commands through the console.
 
 Add a `minecraft_bedrock_server` label under the `labels` list (value is not important) to flag this container so that the bridge can succesfully discover it.
 
