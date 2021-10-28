@@ -1,6 +1,6 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/macchie/minecraft-bedrock-server-bridge.svg)](https://hub.docker.com/r/macchie/minecraft-bedrock-server-bridge/)
 [![GitHub Issues](https://img.shields.io/github/issues-raw/macchie/minecraft-bedrock-server-bridge.svg)](https://github.com/macchie/minecraft-bedrock-server-bridge/issues)
-
+[![](https://img.shields.io/badge/Donate-Buy%20me%20a%20coffee-orange.svg)](https://www.buymeacoffee.com/macchie)
 # Minecraft Bedrock Server Bridge
 
 `RCON` replacement for Minecraft Bedrock Dedicated Servers.
@@ -98,6 +98,21 @@ or execute any other command:
 The command response will be texted back to you by the BOT, if the command generates no output a confirmation of execution is sent back.
 
 ##### Using HTTP API
+
+First you need to expose the port, to do this edit your `docker-compose.yml` file and add the HTTP API port:
+
+```yaml
+bds_bridge:
+  image: macchie/minecraft-bedrock-server-bridge
+  environment:
+    - TELEGRAM_BOT_TOKEN=12345
+    - TELEGRAM_BOT_ADMINS=username1,username2
+  # add the ports entry
+  ports:
+    - 17394:17394
+  volume:
+    - /var/run/docker.sock:/var/run/docker.sock
+```
 
 The HTTP API exposes a single `/execute` endpoint, the request is made in standard JSON format, here is an example via `CURL` (any HTTP client is valid):
 
