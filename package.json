@@ -1,6 +1,6 @@
 {
   "name": "minecraft-bedrock-server-bridge",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Minecraft Bedrock Server Bridge",
   "main": "dist/main.js",
   "scripts": {
