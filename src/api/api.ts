@@ -57,8 +57,15 @@ export class API {
         this.bridge.sendMessage(new BridgeCommand('api', command));
       }
 
+      let reqStartTime = new Date().getTime();
+
       while (!this.response) {
-        await Helpers.sleep(50);
+        // if (new Date().getTime() - reqStartTime > 3000) {
+        //   await this.bridge.init();
+        //   this.bridge.sendMessage(new BridgeCommand('api', command));
+        // }
+
+        await Helpers.sleep(1);
       }
 
       res.send({ status: 200, response: this.response.response})

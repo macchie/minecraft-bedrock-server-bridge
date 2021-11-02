@@ -1,0 +1,101 @@
+{
+  "init": {
+    "message": "im going to build a test structure!"
+  },
+  "build": {
+    "start": [ 0, 64, 0 ],
+    "clean": true,
+    "base": "grass",
+    "borderSize": 3,
+    "layers": [
+      [ 
+        [ "sealantern", "stone", "stone", "stone", "stone", "stone", "stone", "stone", "sealantern"],
+        [ "stone", "stone", null, null, "stone", null, null, "stone", "stone"],
+        [ "stone", null, "stone", null, "stone", null, "stone", null, "stone"],
+        [ "stone", null, null, "stone", "stone", "stone", null, null, "stone"],
+        [ "stone", "stone", "stone", "stone", "stone", "stone", "stone", "stone", "stone"],
+        [ "stone", null, null, "stone", "stone", "stone", null, null, "stone"],
+        [ "stone", null, "stone", null, "stone", null, "stone", null, "stone"],
+        [ "stone", "stone", null, null, "stone", null, null, "stone", "stone"],
+        [ "sealantern", "stone", "stone", "stone", "stone", "stone", "stone", "stone", "sealantern"]
+      ],
+      [ 
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, "stone", null, null, "stone", null, null, "stone", null],
+        [ null, null, "stone", null, "stone", null, "stone", null, null],
+        [ null, null, null, null, "stone", null, null, null, null],
+        [ null, "stone", "stone", "stone", "stone", "stone", "stone", "stone", null],
+        [ null, null, null, null, "stone", null, null, null, null],
+        [ null, null, "stone", null, "stone", null, "stone", null, null],
+        [ null, "stone", null, null, "stone", null, null, "stone", null],
+        [ null, null, null, null, null, null, null, null, null]
+      ],
+      [ 
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, "stone", null, "stone", null, "stone", null, null],
+        [ null, null, null, null, "stone", null, null, null, null],
+        [ null, null, "stone", "stone", "stone", "stone", "stone", null, null],
+        [ null, null, null, null, "stone", null, null, null, null],
+        [ null, null, "stone", null, "stone", null, "stone", null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null]
+      ],
+      [ 
+        [ "sealantern", null, null, null, null, null, null, null, "sealantern"],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, "stone", "stone", "stone", null, null, null],
+        [ null, null, null, "stone", "stone", "stone", null, null, null],
+        [ null, null, null, "stone", "stone", "stone", null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ "sealantern", null, null, null, null, null, null, null, "sealantern"]
+      ],
+      [ 
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, "stone", null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null]
+      ],
+      [ 
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, "diamond_block", null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null]
+      ],
+      [ 
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null]
+      ],
+      [ 
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, "sealantern", null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null],
+        [ null, null, null, null, null, null, null, null, null]
+      ]
+    ]
+  }
+}

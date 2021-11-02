@@ -1,7 +1,6 @@
 import fs from 'fs';
 import Dockerode from 'dockerode';
 import { EventEmitter } from 'events';
-import { Transform } from 'stream';
 
 export const DOCKER_SERVER_LABEL = process.env.BDS_CONTAINER_LABEL || 'minecraft_bedrock_server';
 
@@ -22,14 +21,10 @@ export class DockerBridge extends EventEmitter {
 
   private client!: Dockerode;
   private serverContainer!: Dockerode.Container;
-  private outStream!: NodeJS.ReadWriteStream;
   private currentCommand!: BridgeCommand | null;
   private responseTimeout?;
+  private writeInterval?;
   private queue: BridgeCommand[] = [];
-
-  private streamFilter = new Transform({
-    decodeStrings: false
-  });
 
   constructor() {
     super();
@@ -40,29 +35,17 @@ export class DockerBridge extends EventEmitter {
   }
 
   public async init() {
-    if (fs.existsSync('/var/run/docker.sock')) {
-      this.client = new Dockerode({socketPath: '/var/run/docker.sock'});
-      console.log(`Docker UNIX Socket found!`);
-    } else {
-      console.log(`No Docker UNIX Socket found!`);
-      return;
+    if (fs.existsSync('/var/run/docker.sock') && this.client === undefined) {
+      try {
+        this.client = new Dockerode({socketPath: '/var/run/docker.sock'});
+        console.log(`Docker UNIX Socket found!`);
+      } catch (error) {
+        console.log(`No Docker UNIX Socket found!`);
+      }
     }
 
-    this.setStreamFilter();
     await this.setServerContainer();
     await this.attachToContainer();
-
-    setInterval(() => {
-      if (this.currentCommand) {
-        return;
-      }
-
-      if (this.outStream && this.queue[0]) {
-        this.currentCommand = this.queue[0];
-        this.queue.shift();
-        this.outStream.write(`${this.currentCommand.command}\n`);
-      }
-    }, 50);
   }
 
   public async sendMessage(command: BridgeCommand) {
@@ -76,12 +59,18 @@ export class DockerBridge extends EventEmitter {
     /// Create the transform stream:
     if (this.serverContainer) {
       this.serverContainer.attach({stream: true, stdin: true, stdout: true, stderr: true}, (err, stream) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
         if (!stream) {
+          console.log(`no stream`)
           return;
         }
 
-        stream.pipe(this.streamFilter)
-        this.outStream = stream;
+        this.handleRead(stream);
+        this.handleWrite(stream);
+
         console.log(`Attached to Server container!`);
       });
     } else {
@@ -102,9 +91,13 @@ export class DockerBridge extends EventEmitter {
     }
   }
 
-  private setStreamFilter() {
-    this.streamFilter._transform = (chunk, encoding, done) => {
-      const out = chunk.toString();
+  private async handleRead(stream: NodeJS.ReadWriteStream) {
+    stream.on('data', (data) => {
+      const out = data.toString();
+
+      if (out.toLowerCase().startsWith('[info]')) {
+        return;
+      }
 
       if (this.responseTimeout) {
         clearTimeout(this.responseTimeout);
@@ -120,9 +113,25 @@ export class DockerBridge extends EventEmitter {
           
           this.currentCommand = null;
         }
-      }, 200)
-      
-      return done(null, out);
-    };
+      }, 100);
+    });
+  }
+
+  private async handleWrite(stream: NodeJS.ReadWriteStream) {
+    if (this.writeInterval) {
+      clearInterval(this.writeInterval);
+    }
+
+    this.writeInterval = setInterval(async () => {
+      if (this.currentCommand) {
+        return;
+      }
+
+      if (stream && this.queue[0]) {
+        this.currentCommand = this.queue[0];
+        this.queue.shift();
+        stream.write(`${this.currentCommand.command}\n`);
+      }
+    }, 50);
   }
 }

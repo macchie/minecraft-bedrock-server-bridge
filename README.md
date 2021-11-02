@@ -137,10 +137,32 @@ The HTTP API response is also in standard JSON format and looks like this:
 }
 ```
 
+### `minegen.js` example script
+
+After enabling your HTTP API you can send commands to your server with simple HTTP requests, this allows you to script command execution.
+Inside the `examples/` folder you will find a simple JavaScript file that creates auto-generated fill commands from a `.json` input source.
+
+Here is an example of what you can achieve:
+
+![](docs/minegen.gif)
+
+To test this structure on your server use this syntax:
+
+```bash
+# 
+./minegen.js INPUT_FILE [START_X, optional] [START_Y, optional] [START_Z, optional]
+
+# example (defaults on server 127.0.0.1:17394)
+./minegen.js test.json 0 64 0
+
+# example (defaults on server 127.0.0.1:17394)
+SERVER_IP=localhost SERVER_PORT=17394 ./minegen.js test.json 0 64 0
+```
 ### Notes
 
 - Currently working **ONLY** in combination with: [itzg/docker-minecraft-bedrock-server](https://github.com/itzg/docker-minecraft-bedrock-server) **in a Docker Environment**
 ### To-Do
 
+- add `minegen.js` json format info
 - Add Web Panel ?
 
